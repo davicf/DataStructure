@@ -1,22 +1,19 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using EstruturaDeDados;
 
-MinhaFila<string> fila = new MinhaFila<string>(3);
+var fila = new EstruturaDeDados.Queue<string>(3);
 
-// Adicionando elementos à fila
 fila.Enqueue("Primeiro");
 fila.Enqueue("Segundo");
 fila.Enqueue("Terceiro");
-//fila.Enqueue("Quarto"); // Disparada exceção
 
-// Removendo e exibindo elementos da fila
 Console.WriteLine("Exibindo elementos da fila com " + fila.Count() + " elementos");
 while (!fila.IsEmpty())
 {
     Console.WriteLine("Elemento removido: " + fila.Dequeue());
 }
 
-MinhaPilha<int> pilha = new MinhaPilha<int>(3);
+var pilha = new EstruturaDeDados.Stack<int>(3);
 
 // Adicionando elementos à pilha
 pilha.Push(1);

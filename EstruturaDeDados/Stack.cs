@@ -1,17 +1,17 @@
 ﻿namespace EstruturaDeDados
 {
-    public class MinhaPilha<T>
+    public class Stack<T>
     {
         private T[] _elementos;
         private int _top;
         private int _tamanhoMaximo;
         private int _tamanhoAtual;
 
-        public MinhaPilha(int tamanhoMaximo)
+        public Stack(int tamanhoMaximo)
         {
             _top = -1;
-            _tamanhoMaximo = tamanhoMaximo;
             _tamanhoAtual = 0;
+            _tamanhoMaximo = tamanhoMaximo;
             _elementos = new T[tamanhoMaximo];
         }
 
@@ -19,8 +19,6 @@
         {
             if (_tamanhoAtual == _tamanhoMaximo)
             {
-                //Ou pode ser redimensionada
-                //Array.Resize(ref _elementos, _elementos.Length * 2);
                 throw new Exception("Pilha cheia");
             }
 

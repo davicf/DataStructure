@@ -1,6 +1,6 @@
 ﻿namespace EstruturaDeDados
 {
-    public class MinhaFila<T>
+    public class Queue<T>
     {
         private T[] _elementos;
         private int _tamanhoMaximo;
@@ -8,7 +8,7 @@
         private int _fim;
         private int _tamanhoAtual;
 
-        public MinhaFila(int tamanhoMaximo)
+        public Queue(int tamanhoMaximo)
         {
             _tamanhoMaximo = tamanhoMaximo;
             _inicio = 0;
