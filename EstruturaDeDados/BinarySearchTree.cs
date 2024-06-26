@@ -17,11 +17,6 @@
             _root = Insert(_root, item);
         }
 
-        public void Remove(T item)
-        {
-
-        }
-
         public void DeleteTree(NodeTree<T> currentNode)
         {
 
@@ -40,9 +35,19 @@
                 return false;
             }
 
-            itemResult = TryGet(item, _root);
+            var result = TryGet(item, _root);
+
+            itemResult = result is null ? default : result.Data;
 
             return itemResult is not null;
+        }
+
+        public void Remove(T item)
+        {
+            if (item == null)
+                return;
+
+            _root = Remove(_root, item);
         }
 
         private NodeTree<T> Insert(NodeTree<T> node, T item)
@@ -64,7 +69,7 @@
             return node;
         }
 
-        private T? TryGet(T item, NodeTree<T> nodeCurrent)
+        private NodeTree<T>? TryGet(T item, NodeTree<T> nodeCurrent)
         {
             if (nodeCurrent is null)
             {
@@ -82,7 +87,63 @@
                 return TryGet(item, nodeCurrent.RightChild);
             }
 
-            return nodeCurrent.Data;
+            return nodeCurrent;
+        }
+
+        private NodeTree<T>? Remove(NodeTree<T> nodeCurrent, T item)
+        {
+            if (nodeCurrent == null)
+                return null;
+
+            var compareResult = item.CompareTo(nodeCurrent.Data);
+
+            if (compareResult < 0)
+            {
+                nodeCurrent.LeftChild = Remove(nodeCurrent.LeftChild, item);
+            }
+            else if (compareResult > 0)
+            {
+                nodeCurrent.RightChild = Remove(nodeCurrent.RightChild, item);
+            }
+            else
+            {
+                if (IsLeaf(nodeCurrent))
+                {
+                    return null;
+                }
+                else if (HasOneChild(nodeCurrent))
+                {
+                    return nodeCurrent.LeftChild is null ? nodeCurrent.RightChild : nodeCurrent.LeftChild;
+                }
+                else
+                {
+                    nodeCurrent.Data = FindMin(nodeCurrent.RightChild).Data;
+                    nodeCurrent.RightChild = Remove(nodeCurrent.RightChild, nodeCurrent.Data);
+                }
+            }
+
+            return nodeCurrent;
+        }
+
+        private static bool IsLeaf(NodeTree<T> nodeToBeDeleted)
+        {
+            return nodeToBeDeleted.LeftChild is null &&
+                            nodeToBeDeleted.RightChild is null;
+        }
+
+        private static bool HasOneChild(NodeTree<T> nodeCurrent)
+        {
+            return (nodeCurrent.LeftChild is null && nodeCurrent.RightChild is not null) ||
+                                    (nodeCurrent.RightChild is null && nodeCurrent.LeftChild is not null);
+        }
+
+        private NodeTree<T> FindMin(NodeTree<T> node)
+        {
+            while (node.LeftChild != null)
+            {
+                node = node.LeftChild;
+            }
+            return node;
         }
 
         public bool IsEmpty()
@@ -104,6 +165,8 @@
         {
 
         }
+
+
     }
 
     public class NodeTree<T>

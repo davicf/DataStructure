@@ -79,14 +79,19 @@ static void ExecuteBinarySearchTree()
 {
     var binaryTree = new BinarySearchTree<Student>();
 
+    var fifthStudent = new Student("Name 5");
+    binaryTree.Insert(fifthStudent);
     binaryTree.Insert(new Student("Name 1"));
     binaryTree.Insert(new Student("Name 2"));
     binaryTree.Insert(new Student("Name 3"));
     var fourthStudent = new Student("Name 4");
-    var fifthStudent = new Student("Name 5");
-    binaryTree.Insert(fifthStudent);
     binaryTree.Insert(fourthStudent);
 
     Student? studentResult;
     var success = binaryTree.TryGet(fifthStudent, out studentResult);
+    Console.WriteLine("Elemento:" + studentResult.Name);
+
+    binaryTree.Remove(fifthStudent);
+    var success2 = binaryTree.TryGet(fifthStudent, out studentResult);
+    Console.WriteLine("Elemento:" + studentResult?.Name);
 }
