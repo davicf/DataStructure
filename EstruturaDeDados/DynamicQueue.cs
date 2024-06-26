@@ -2,53 +2,51 @@
 {
     public class DynamicQueue<T>
     {
-        private NodeDynamicQueue<T> _front;
-        private NodeDynamicQueue<T> _rear;
-        private int _count;
+        private NodeDynamicQueue<T> front;
+        private NodeDynamicQueue<T> rear;
+        private int count;
 
         public DynamicQueue()
         {
-            _front = null;
-            _rear = null;
-            _count = 0;
+            front = null;
+            count = 0;
         }
 
-        public void Enqueue(T data)
+        public void Enqueue(T item)
         {
-            var newNode = new NodeDynamicQueue<T>
-            {
-                Data = data
-            };
+            NodeDynamicQueue<T> newNode = new NodeDynamicQueue<T> { Data = item };
 
-            if (_front == null)
+            if (rear == null)
             {
-                _front = newNode;
+                front = newNode;
+                rear = newNode;
             }
             else
             {
-                _rear.Next = newNode;
+                rear.Next = newNode;
+                rear = newNode;
             }
 
-            _rear = newNode;
-            _count++;
+            count++;
         }
 
         public T Dequeue()
         {
             if (IsEmpty())
             {
-                throw new Exception("Queue is empty");
+                throw new InvalidOperationException("A fila está vazia.");
             }
 
-            _count--;
-            var tempItem = _front.Data;
-            _front = _front.Next;
-            if (_front == null)
+            T data = front.Data;
+            front = front.Next;
+            count--;
+
+            if (front == null)
             {
-                _rear = null;
+                rear = null; // Se front se tornar nulo, rear também deve ser nulo
             }
 
-            return tempItem;
+            return data;
         }
 
         public T Peek()
@@ -58,24 +56,24 @@
                 throw new InvalidOperationException("Queue is empty");
             }
 
-            return _front.Data;
+            return front.Data;
         }
 
         public void Clear()
         {
-            _front = null;
-            _rear = null;
-            _count = 0;
+            front = null;
+            rear = null;
+            count = 0;
         }
 
         public bool IsEmpty()
         {
-            return _front == null;
+            return front == null;
         }
 
         public int Count()
         {
-            return _count;
+            return count;
         }
     }
 
