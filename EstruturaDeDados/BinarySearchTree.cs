@@ -9,6 +9,11 @@
             _root = null;
         }
 
+        public bool IsEmpty()
+        {
+            return _root is null;
+        }
+
         public void Insert(T item)
         {
             if (item is null)
@@ -48,6 +53,63 @@
                 return;
 
             _root = Remove(_root, item);
+        }
+
+        public void PrintPreOrder()
+        {
+            PrintPreOrder(_root);
+        }
+
+        public void PrintInOrder()
+        {
+            PrintInOrder(_root);
+        }
+
+        public void PrintPostOrder()
+        {
+            PrintPostOrder(_root);
+        }
+
+        public void PrintPreOrder(NodeTree<T> node)
+        {
+            if (node is not null)
+            {
+                Console.WriteLine(node.Data.ToString());
+            }
+            else
+            {
+                return;
+            }
+
+            PrintPreOrder(node.LeftChild);
+            PrintPreOrder(node.RightChild);
+        }
+
+        private void PrintInOrder(NodeTree<T> node)
+        {
+            if (node is null)
+            {
+                return;
+            }
+
+            PrintInOrder(node.LeftChild);
+
+            Console.WriteLine(node.Data.ToString());
+
+            PrintInOrder(node.RightChild);
+        }
+
+        private void PrintPostOrder(NodeTree<T> node)
+        {
+            if (node is null)
+            {
+                return;
+            }
+
+            PrintPostOrder(node.LeftChild);
+            PrintPostOrder(node.RightChild);
+
+            Console.WriteLine(node.Data.ToString());
         }
 
         private NodeTree<T> Insert(NodeTree<T> node, T item)
@@ -145,28 +207,6 @@
             }
             return node;
         }
-
-        public bool IsEmpty()
-        {
-            return _root is null;
-        }
-
-        void PrintPreOrder(NodeTree<T> node)
-        {
-
-        }
-
-        void PrintInOrder(NodeTree<T> node)
-        {
-
-        }
-
-        void PrintPostOrder(NodeTree<T> node)
-        {
-
-        }
-
-
     }
 
     public class NodeTree<T>
@@ -192,6 +232,11 @@
         public int CompareTo(Student other)
         {
             return Id.CompareTo(other.Id);
+        }
+
+        public override string ToString()
+        {
+            return Id + " - " + Name;
         }
     }
 }

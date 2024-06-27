@@ -79,19 +79,32 @@ static void ExecuteBinarySearchTree()
 {
     var binaryTree = new BinarySearchTree<Student>();
 
-    var fifthStudent = new Student("Name 5");
+    var seventhStudent = new Student("Name 1");
+    var fifthStudent = new Student("Name 2");
+    var sixthStudent = new Student("Name 3");
     binaryTree.Insert(fifthStudent);
-    binaryTree.Insert(new Student("Name 1"));
-    binaryTree.Insert(new Student("Name 2"));
-    binaryTree.Insert(new Student("Name 3"));
-    var fourthStudent = new Student("Name 4");
+    binaryTree.Insert(new Student("Name 4"));
+    binaryTree.Insert(new Student("Name 5"));
+    binaryTree.Insert(new Student("Name 6"));
+    binaryTree.Insert(sixthStudent);
+    var fourthStudent = new Student("Name 7");
     binaryTree.Insert(fourthStudent);
+    binaryTree.Insert(seventhStudent);
 
-    Student? studentResult;
-    var success = binaryTree.TryGet(fifthStudent, out studentResult);
-    Console.WriteLine("Elemento:" + studentResult.Name);
+    Console.WriteLine("Pre Order");
+    binaryTree.PrintPreOrder();
 
-    binaryTree.Remove(fifthStudent);
-    var success2 = binaryTree.TryGet(fifthStudent, out studentResult);
-    Console.WriteLine("Elemento:" + studentResult?.Name);
+    Console.WriteLine("In Order");
+    binaryTree.PrintInOrder();
+
+    Console.WriteLine("Post Order");
+    binaryTree.PrintPostOrder();
+
+    ////Student? studentResult;
+    ////var success = binaryTree.TryGet(fifthStudent, out studentResult);
+    ////Console.WriteLine("Elemento:" + studentResult.Name);
+
+    //binaryTree.Remove(fifthStudent);
+    //var success2 = binaryTree.TryGet(fifthStudent, out studentResult);
+    //Console.WriteLine("Elemento:" + studentResult?.Name);
 }
