@@ -100,6 +100,8 @@ static void ExecuteBinarySearchTree()
     Console.WriteLine("Post Order");
     binaryTree.PrintPostOrder();
 
+    Console.WriteLine("Delete tree");
+    binaryTree.DeleteTree();
     ////Student? studentResult;
     ////var success = binaryTree.TryGet(fifthStudent, out studentResult);
     ////Console.WriteLine("Elemento:" + studentResult.Name);

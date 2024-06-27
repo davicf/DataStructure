@@ -22,9 +22,9 @@
             _root = Insert(_root, item);
         }
 
-        public void DeleteTree(NodeTree<T> currentNode)
+        public void DeleteTree()
         {
-
+            DeleteTree(_root);
         }
 
         public NodeTree<T> GetRoot()
@@ -206,6 +206,17 @@
                 node = node.LeftChild;
             }
             return node;
+        }
+
+        private void DeleteTree(NodeTree<T> currentNode)
+        {
+            if (currentNode is not null)
+            {
+                DeleteTree(currentNode.LeftChild);
+                DeleteTree(currentNode.RightChild);
+
+                Remove(currentNode.Data);
+            }
         }
     }
 
